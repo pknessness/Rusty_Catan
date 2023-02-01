@@ -1,5 +1,5 @@
 [package]
-name = "Rusty_Catan"
+name = "rusty_catan"
 version = "0.1.0"
 edition = "2021"
 

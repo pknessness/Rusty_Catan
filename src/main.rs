@@ -3,6 +3,7 @@ mod board;
 use bevy::prelude::*;
 use bevy_vox_mesh::VoxMeshPlugin;
 use std::f32::consts::PI;
+use crate::board::Board;
 
 pub const HEIGHT: f32 = 720.0;
 pub const WIDTH: f32 = 1280.0;
@@ -14,6 +15,7 @@ fn main() {
         .add_plugin(VoxMeshPlugin::default())
         .add_startup_system(spawn_camera)
         .add_startup_system(spawn_scene)
+        .add_startup_system(spawn_board)
         .add_system(move_camera)
         .run();
 }
@@ -26,8 +28,10 @@ fn spawn_camera(mut commands: Commands) {
     });
 }
 
-fn spawn_graph() {
-
+fn spawn_board(mut commands: Commands) {
+    commands.spawn(
+        Board::new()
+    );
 }
 
 fn spawn_scene(

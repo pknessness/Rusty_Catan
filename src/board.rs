@@ -37,7 +37,7 @@ impl ops::Add<Coord> for Coord {
 impl Board {
     pub fn new() -> Self {
         let mut board = Graph::<GameCell, Road>::new();
-        let mut node = board.add_node(GameCell::new());
+        let node = board.add_node(GameCell::new());
         let mut visited: HashMap<Coord, NodeIndex> = HashMap::new();
         let mut distance: HashMap<Coord, i16> = HashMap::new();
         let mut added: HashMap<Coord, NodeIndex> = HashMap::new();
@@ -54,17 +54,17 @@ impl Board {
             Coord { x: 0, y: -1, z: 1 },
             Coord { x: 0, y: 1, z: -1 }];
         while frontier.size() != 0 {
-            let mut current: Coord = frontier.remove().unwrap();
+            let current: Coord = frontier.remove().unwrap();
             if distance.get(&current).unwrap().clone() < MAXDIST { //strictly lt maxdist cuz adding adjacent
-                for OFFSET in OFFSETS {
-                    let mut candidate: Coord = current.clone() + OFFSET.clone();
-                    let mut canind: NodeIndex = added.get(&current).unwrap().clone();
+                for offset in OFFSETS {
+                    let candidate: Coord = current.clone() + offset.clone();
+                    let canind: NodeIndex = added.get(&current).unwrap().clone();
                     if !(visited.contains_key(&candidate) || added.contains_key(&candidate)) {
-                        let mut cannode = board.add_node(GameCell::new());
+                        let cannode = board.add_node(GameCell::new());
                         added.insert(candidate.clone(), cannode);
                         distance.insert(candidate.clone(), distance.get(&current).unwrap() + 1);
                         board.add_edge(canind, cannode, Road {});
-                        frontier.add(candidate.clone());
+                        frontier.add(candidate.clone()).unwrap();
                         println!("Added {:?}", candidate);
                     }
                     visited.insert(candidate.clone(), canind);

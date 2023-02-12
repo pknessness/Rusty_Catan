@@ -14,3 +14,4 @@ opt-level = 3
 [dependencies]
 bevy = "0.9.1"
 bevy_vox_mesh = "0.5.0"
+petgraph = "0.6.3"

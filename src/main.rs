@@ -1,3 +1,5 @@
+mod board;
+
 use bevy::prelude::*;
 use bevy_vox_mesh::VoxMeshPlugin;
 use std::f32::consts::PI;
@@ -22,6 +24,10 @@ fn spawn_camera(mut commands: Commands) {
         transform: position,
         ..default()
     });
+}
+
+fn spawn_graph() {
+
 }
 
 fn spawn_scene(
